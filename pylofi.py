@@ -13,6 +13,7 @@ class Youtube:
         self.videos = {}
 
         self.get_links()
+        random.shuffle(self.links)
 
     def get_links(self):
         with open(self.path, "rb") as ytfile:
@@ -23,7 +24,8 @@ class Youtube:
             )
 
     def get_random(self):
-        link = random.choice(self.links)
+        link = self.links.pop(0)
+        self.links.append(link)
         if link not in self.videos:
             self.videos[link] = pafy.new(link)
 
