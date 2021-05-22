@@ -1,9 +1,13 @@
+import os
 import random
 import re
+import subprocess
 
+os.environ["PATH"] = os.path.dirname(__file__) + os.pathsep + os.environ["PATH"]
 import pafy
 import pyglet
-import vlc
+
+import mpv
 
 
 class Youtube:
@@ -34,13 +38,13 @@ class Youtube:
 
 class Player:
     def __init__(self):
-        self.instance = vlc.Instance("--no-video")
-        self.player = self.instance.media_player_new()
+        self.player = mpv.MPV(ytdl=True)
+        self.player.property_add("video", 0)
 
     def play(self, url):
-        media = self.instance.media_new(url)
-        self.player.set_media(media)
-        self.player.play()
+        self.player.play(url)
+        # self.player.wait_for_playback()
+        # subprocess.Popen("start /b " + "mpv.exe " + url + " --no-video", shell=True)
 
 
 class Gui:
