@@ -3,16 +3,13 @@ from cx_Freeze import setup, Executable
 # Dependencies are automatically detected, but it might need
 # fine tuning.
 build_options = {
-    "packages": ["pyglet", "re", "random", "pafy", "vlc", "youtube_dl", "pyglet.media"],
+    "packages": ["pyglet", "re", "random", "pafy", "vlc", "youtube_dl", "mpv.py"],
     "excludes": ["tkinter"],
     "includes": ["vlc"],
     "include_files": [
         r"res\Agave-Regular.ttf",
         "youtube.md",
-        r"C:\Program Files\VideoLAN\VLC\libvlc.dll",
-        r"C:\Program Files\VideoLAN\VLC\libvlccore.dll",
-        r"C:\Program Files\VideoLAN\VLC\vlc.exe",
-
+        "mpv-1.dll",
     ],
 }
 
