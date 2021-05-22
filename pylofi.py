@@ -1,11 +1,12 @@
 import os
 import random
 import re
-import subprocess
+
+import _thread as thread
 
 os.environ["PATH"] = os.path.dirname(__file__) + os.pathsep + os.environ["PATH"]
-import pafy
 import pyglet
+import youtube_dl
 
 import mpv
 
@@ -14,7 +15,10 @@ class Youtube:
     def __init__(self):
         self.path = "youtube.md"
         self.links = []
-        self.videos = {}
+        self.video = {}
+        self.is_fetching = False
+
+        self.ydl = youtube_dl.YoutubeDL({})
 
         self.get_links()
         random.shuffle(self.links)
@@ -28,12 +32,15 @@ class Youtube:
             )
 
     def get_random(self):
+        self.is_fetching = True
         link = self.links.pop(0)
         self.links.append(link)
-        if link not in self.videos:
-            self.videos[link] = pafy.new(link)
+        try:
+            self.video = self.ydl.extract_info(link, download=False)
+        except youtube_dl.utils.DownloadError:
+            print("bad link %s" % link)
 
-        return self.videos[link]
+        self.is_fetching = False
 
 
 class Player:
@@ -43,8 +50,6 @@ class Player:
 
     def play(self, url):
         self.player.play(url)
-        # self.player.wait_for_playback()
-        # subprocess.Popen("start /b " + "mpv.exe " + url + " --no-video", shell=True)
 
 
 class Gui:
@@ -53,7 +58,8 @@ class Gui:
         self.youtube = Youtube()
         self.player = Player()
 
-        self.current_video = None
+        self.current = None
+        self.is_new = True
         self.author = ""
         self.title = ""
 
@@ -73,25 +79,36 @@ class Gui:
         self.random_lofi()
 
     def random_lofi(self):
-        self.current_video = self.youtube.get_random()
-        self.author = "".join(filter(str.isascii, self.current_video.author))
-        self.title = "".join(filter(str.isascii, self.current_video.title))
+        if not self.youtube.is_fetching:
+            thread.start_new_thread(self.youtube.get_random, ())
+            self.is_new = True
 
-        self.label_author.text = self.author
-        self.label_title.text = self.title
+    def swap_info(self):
+        if self.youtube.is_fetching:
+            self.label_title.text = "..."
+        else:
+            self.current = self.youtube.video
+            self.author = "".join(filter(str.isascii, self.current["uploader"]))
+            self.title = "".join(filter(str.isascii, self.current["title"]))
 
-        self.player.play(self.current_video.streams[0].url)
+            self.label_author.text = self.author
+            self.label_title.text = self.title
+
+            if self.is_new:
+                self.player.play(self.current["formats"][0]["url"])
+                self.is_new = False
 
     def draw(self):
         self.label_author.draw()
         self.label_title.draw()
 
     def scroll(self, dt):
-        text = str(self.label_title.text)
-        self.label_title.text = text[1:] + text[0]
+        if self.label_title.content_width > self.window.width:
+            text = str(self.label_title.text)
+            self.label_title.text = text[1:] + text[0]
 
 
-window = pyglet.window.Window()
+window = pyglet.window.Window(caption="pylofi")
 BATCH = pyglet.graphics.Batch()
 
 pyglet.resource.path.append("res")
@@ -107,6 +124,7 @@ def on_draw():
     pyglet.gl.glClear(pyglet.gl.GL_COLOR_BUFFER_BIT)
     # window.clear()
     BATCH.draw()
+    gui.swap_info()
     gui.draw()
 
 
