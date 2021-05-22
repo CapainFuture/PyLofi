@@ -2,4 +2,4 @@ res/
 build/
 *.exe
 *.dll
-__pycache__\
+__pycache__/
