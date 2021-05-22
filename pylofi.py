@@ -128,10 +128,17 @@ def on_draw():
     gui.draw()
 
 
-@window.event
-def on_mouse_press(x, y, button, modifiers):
-    gui.random_lofi()
+depressed = pyglet.resource.image("random_notpressed.png")
+pressed = pyglet.resource.image("random_pressed.png")
+hover = pyglet.resource.image("random_hover.png")
+frame = pyglet.gui.Frame(window, order=4)
 
+playnext_button = pyglet.gui.PushButton(
+    100, 300, pressed=pressed, depressed=depressed, hover=hover, batch=BATCH
+)
+playnext_button.set_handler("on_release", gui.random_lofi)
+
+frame.add_widget(playnext_button)
 
 pyglet.clock.schedule_interval(gui.scroll, 0.5)
 pyglet.app.run()
