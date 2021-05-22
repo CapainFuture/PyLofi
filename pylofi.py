@@ -1,4 +1,3 @@
-import asyncio
 import random
 import re
 
@@ -52,6 +51,7 @@ class Gui:
         self.author = ""
         self.title = ""
 
+        self.font = pyglet
         self.label_author = pyglet.text.Label(
             "",
             font_name="Agave",
@@ -87,6 +87,10 @@ class Gui:
 
 window = pyglet.window.Window()
 BATCH = pyglet.graphics.Batch()
+
+pyglet.resource.path.append("res")
+pyglet.resource.add_font("Agave-Regular.ttf")
+agave = pyglet.font.load("Agave")
 pyglet.gl.glClearColor(0.2, 0.4, 0.5, 1.0)
 
 gui = Gui(window)
