@@ -1,21 +1,22 @@
+from glob import glob
 from cx_Freeze import setup, Executable
 
 # Dependencies are automatically detected, but it might need
 # fine tuning.
 build_options = {
-    "packages": ["pyglet", "re", "random", "pafy", "vlc", "youtube_dl", "mpv.py"],
+    "packages": ["pyglet", "re", "random", "youtube_dl", "mpv"],
     "excludes": ["tkinter"],
-    "includes": ["vlc"],
     "include_files": [
-        r"res\Agave-Regular.ttf",
         "youtube.md",
         "mpv-1.dll",
+        *glob("res\*"),
     ],
+    "optimize": 2,
 }
 
 import sys
 
-# base = "Win32GUI" if sys.platform == "win32" else None
+base = "Win32GUI" if sys.platform == "win32" else None
 
 executables = [Executable("pylofi.py", target_name="pylofi.exe")]
 
@@ -26,4 +27,5 @@ setup(
     description="lofi meta player",
     options={"build_exe": build_options},
     executables=executables,
+    compress=True,
 )

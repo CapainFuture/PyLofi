@@ -1,3 +1,4 @@
+import webbrowser
 import os
 import random
 import re
@@ -16,6 +17,7 @@ class Youtube:
         self.path = "youtube.md"
         self.links = []
         self.video = {}
+        self.last_videos = []
         self.is_fetching = False
 
         self.ydl = youtube_dl.YoutubeDL({})
@@ -37,6 +39,7 @@ class Youtube:
         self.links.append(link)
         try:
             self.video = self.ydl.extract_info(link, download=False)
+            self.last_videos.append(self.video)
         except youtube_dl.utils.DownloadError:
             print("bad link %s" % link)
 
@@ -65,11 +68,7 @@ class Gui:
 
         self.font = pyglet
         self.label_author = pyglet.text.Label(
-            "",
-            font_name="Agave",
-            font_size=10,
-            x=10,
-            y=10,
+            "", font_name="Agave", font_size=10, x=10, y=10,
         )
 
         self.label_title = pyglet.text.Label(
@@ -82,6 +81,16 @@ class Gui:
         if not self.youtube.is_fetching:
             thread.start_new_thread(self.youtube.get_random, ())
             self.is_new = True
+
+    def goback(self):
+        self.current = self.youtube.last_videos.pop(-1)
+        self.youtube.last_videos.insert(0, self.current)
+        self.youtube.video = self.current
+        self.is_new = True
+
+    def open_link(self):
+        print(self.current.keys())
+        webbrowser.open_new_tab(self.current["webpage_url"])
 
     def swap_info(self):
         if self.youtube.is_fetching:
@@ -101,11 +110,6 @@ class Gui:
     def draw(self):
         self.label_author.draw()
         self.label_title.draw()
-
-    def scroll(self, dt):
-        if self.label_title.content_width > self.window.width:
-            text = str(self.label_title.text)
-            self.label_title.text = text[1:] + text[0]
 
 
 window = pyglet.window.Window(caption="pylofi")
@@ -131,14 +135,45 @@ def on_draw():
 depressed = pyglet.resource.image("random_notpressed.png")
 pressed = pyglet.resource.image("random_pressed.png")
 hover = pyglet.resource.image("random_hover.png")
+
+back_depressed = pyglet.resource.image("back_notpressed.png")
+back_pressed = pyglet.resource.image("back_pressed.png")
+back_hover = pyglet.resource.image("back_hover.png")
+
+
+link_depressed = pyglet.resource.image("link_notpressed.png")
+link_pressed = pyglet.resource.image("link_pressed.png")
+link_hover = pyglet.resource.image("link_hover.png")
+
 frame = pyglet.gui.Frame(window, order=4)
 
 playnext_button = pyglet.gui.PushButton(
     100, 300, pressed=pressed, depressed=depressed, hover=hover, batch=BATCH
 )
+
+back_button = pyglet.gui.PushButton(
+    200,
+    200,
+    pressed=back_pressed,
+    depressed=back_depressed,
+    hover=back_hover,
+    batch=BATCH,
+)
+
+link_button = pyglet.gui.PushButton(
+    400,
+    120,
+    pressed=link_pressed,
+    depressed=link_depressed,
+    hover=link_hover,
+    batch=BATCH,
+)
 playnext_button.set_handler("on_release", gui.random_lofi)
+back_button.set_handler("on_release", gui.goback)
+link_button.set_handler("on_release", gui.open_link)
 
 frame.add_widget(playnext_button)
+frame.add_widget(back_button)
+frame.add_widget(link_button)
 
-pyglet.clock.schedule_interval(gui.scroll, 0.5)
 pyglet.app.run()
