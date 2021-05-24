@@ -28,3 +28,4 @@
 - [shiloh - lofi hip hop mix [LIVE 24/7] Shiloh Dynasty](https://www.youtube.com/watch?v=2atQnvunGCo)
 - [lofi hiphop radio | mellow/chill instrumental beats](https://www.youtube.com/watch?v=XDh0JcxrbPM)
 - [Space Lofi Café - relaxing beats to chill/study to](https://www.youtube.com/watch?v=yXa2_m0fhzQ)
+- [Tokyo Hop Cafe 🥡 24/7 Asian Beats Radio](https://www.youtube.com/watch?v=d-7sfN4c8Ek)
