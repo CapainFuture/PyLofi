@@ -33,7 +33,25 @@ class Youtube:
                 txt,
             )
 
+    def extract_all(self):
+        for link in self.links:
+            try:
+                v = self.ydl.extract_info(link, download=False)
+                self.last_videos.append(v)
+                if not self.video:
+                    self.video = v
+            except youtube_dl.utils.DownloadError:
+                print("bad link %s" % link)
+
     def get_random(self):
+        if not self.last_videos:
+            print("wait")
+            return False
+
+        self.video = self.last_videos.pop(0)
+        self.last_videos.append(self.video)
+        return True
+
         self.is_fetching = True
         link = self.links.pop(0)
         self.links.append(link)
@@ -74,12 +92,12 @@ class Gui:
         self.label_title = pyglet.text.Label(
             "", font_name="Agave", font_size=12, x=10, y=40
         )
-
+        thread.start_new_thread(self.youtube.extract_all, ())
         self.random_lofi()
 
     def random_lofi(self):
-        if not self.youtube.is_fetching:
-            thread.start_new_thread(self.youtube.get_random, ())
+        if self.youtube.last_videos:
+            self.youtube.get_random()
             self.is_new = True
 
     def goback(self):
@@ -93,7 +111,7 @@ class Gui:
         webbrowser.open_new_tab(self.current["webpage_url"])
 
     def swap_info(self):
-        if self.youtube.is_fetching:
+        if not self.youtube.last_videos:
             self.label_title.text = "..."
         else:
             self.current = self.youtube.video
