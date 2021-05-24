@@ -29,3 +29,15 @@
 - [lofi hiphop radio | mellow/chill instrumental beats](https://www.youtube.com/watch?v=XDh0JcxrbPM)
 - [Space Lofi Café - relaxing beats to chill/study to](https://www.youtube.com/watch?v=yXa2_m0fhzQ)
 - [Tokyo Hop Cafe 🥡 24/7 Asian Beats Radio](https://www.youtube.com/watch?v=d-7sfN4c8Ek)
+- [Lofi Hip Hop Radio - relaxing beats to chill/study to](https://www.youtube.com/watch?v=dx4kwID_GtE)
+- [24/7 Lofi Radio | Lofi HipHop Relax | Dreamwave Lofi](https://www.youtube.com/watch?v=pKmhzKSwHC8)
+- [24/7 Lofi Radio | Relaxing Lofi | Lofi Hiphop Mix](https://www.youtube.com/watch?v=BFUQ6sAYgO8)
+- [Chill VHS Radio - 24/7 lofi hip hop beats to relax and study](https://www.youtube.com/watch?v=3WBPGAzCcng)
+- [LO:FI](https://www.youtube.com/watch?v=e97w-GHsRMY)
+- [lofi hip hop radio - beats to sleep/chill to](https://www.youtube.com/watch?v=5MNb7DzIStw)
+- [lofi hip hop radio - beats to study/relax to](https://www.youtube.com/watch?v=lMKrenztzR0)
+- [lofi hip hop radio - beats to chill & gaming](https://www.youtube.com/watch?v=W6q5vdQMML0)
+- [lofi hip hop radio for Chilled Study and Relax (lo fi hiphop beats chillhop Live Stream 24/7/365)](https://www.youtube.com/watch?v=yvEKN3RtqQU)
+
+# blues
+- [Positive Blues Music - Good Mood Blues Modern Music for Happy Morning](https://www.youtube.com/watch?v=zcnidIfObzE)
