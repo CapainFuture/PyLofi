@@ -16,10 +16,6 @@
 - [The Aesthetic Laundry 4K 🔴 Lofi Radio 24/7 🌃 Chill Lofi Hip Hop Beats to sleep/ study to](https://www.youtube.com/watch?v=IRseJUSzWTo)
 - [The Jazz Hop Cafe 🎺 24/7 Chill Jazzy Radio](https://www.youtube.com/watch?v=32e2ny13-oI)
 - [Chilly LoFi Sounds Hip Hop Beats Radio - 24/7](https://www.youtube.com/watch?v=1awgnViFTJ8)
-- [TOKYO Cafe: Beautiful Relaxing Jazz Piano Music for Stress Relief - Night Coffee Shop Ambience](https://www.youtube.com/watch?v=6uddGul0oAc)
-- [Coffee Rain: Relaxing Jazz Music with Coffee Shop Ambience - Chill Music for Study, Work](https://www.youtube.com/watch?v=89XPBelvrZk)
-- [Chill Lounge: Night Jazz Piano with Fireplace Sounds - Smooth Jazz Music for Good Mood](https://www.youtube.com/watch?v=IcmTp5vjfEw)
-- [FRIDAY MORNING JAZZ: Positive Jazz & Bossa Nova Music for Relax, Good Mood](https://www.youtube.com/watch?v=2_maOvQ9Sc0)
 - [Lofi Hiphop 24/7 Radio](https://www.youtube.com/watch?v=ypbUNGsFZi8)
 - [Simpson Lofi Radio 24/7 🎧 No Copyright Lofi HipHop Playlist 2021 🎧 Lofi Beats to Study/ Relax to](https://www.youtube.com/watch?v=dolgcC1cHdk)
 - [24/7 Lofi Hip Hop Radio ☁️ beats to relax/study/chill out (No lyrics)](https://www.youtube.com/watch?v=KJ5UazhKXC8)
@@ -38,6 +34,4 @@
 - [lofi hip hop radio - beats to study/relax to](https://www.youtube.com/watch?v=lMKrenztzR0)
 - [lofi hip hop radio - beats to chill & gaming](https://www.youtube.com/watch?v=W6q5vdQMML0)
 - [lofi hip hop radio for Chilled Study and Relax (lo fi hiphop beats chillhop Live Stream 24/7/365)](https://www.youtube.com/watch?v=yvEKN3RtqQU)
-
-# blues
-- [Positive Blues Music - Good Mood Blues Modern Music for Happy Morning](https://www.youtube.com/watch?v=zcnidIfObzE)
+- [lofi hip hop and chillhop radio 24/7 - chill beats to relax/study to](https://www.youtube.com/watch?v=B8tQ8RUbTW8)
