@@ -1,3 +1,7 @@
+"""
+PyLofi
+Plays lofi from lofi lifestreams.
+"""
 import webbrowser
 import os
 import random
@@ -13,6 +17,10 @@ import mpv
 
 
 class Youtube:
+    """
+    Extract links from the youtube.md file
+    """
+
     def __init__(self):
         self.path = "youtube.md"
         self.links = []
@@ -26,6 +34,9 @@ class Youtube:
         random.shuffle(self.links)
 
     def get_links(self):
+        """
+        uses regex to save all available links in self.links.
+        """
         with open(self.path, "rb") as ytfile:
             txt = "".join(filter(str.isascii, ytfile.read().decode())).replace(")", "")
             self.links = re.findall(
@@ -34,6 +45,9 @@ class Youtube:
             )
 
     def extract_all(self):
+        """
+        uses youtube_dl to extract all video-links from self.links
+        """
         for link in self.links:
             try:
                 v = self.ydl.extract_info(link, download=False)
@@ -44,6 +58,9 @@ class Youtube:
                 print("bad link %s" % link)
 
     def get_random(self):
+        """
+        sets self.video
+        """
         if not self.last_videos:
             print("wait")
             return False
@@ -65,6 +82,10 @@ class Youtube:
 
 
 class Player:
+    """
+    uses mpv to play the lufi music.
+    """
+
     def __init__(self):
         self.player = mpv.MPV(ytdl=True)
         self.player.property_add("video", 0)
@@ -74,6 +95,10 @@ class Player:
 
 
 class Gui:
+    """
+    UI and stuff
+    """
+
     def __init__(self, window):
         self.window = window
         self.youtube = Youtube()
@@ -86,7 +111,11 @@ class Gui:
 
         self.font = pyglet
         self.label_author = pyglet.text.Label(
-            "", font_name="Agave", font_size=10, x=10, y=10,
+            "",
+            font_name="Agave",
+            font_size=10,
+            x=10,
+            y=10,
         )
 
         self.label_title = pyglet.text.Label(
@@ -96,21 +125,24 @@ class Gui:
         self.random_lofi()
 
     def random_lofi(self):
+        """ event to play a new lofi """
         if self.youtube.last_videos:
             self.youtube.get_random()
             self.is_new = True
 
     def goback(self):
+        """ go to the previous lofi stream """
         self.current = self.youtube.last_videos.pop(-1)
         self.youtube.last_videos.insert(0, self.current)
         self.youtube.video = self.current
         self.is_new = True
 
     def open_link(self):
-        print(self.current.keys())
+        """ open the lofi stream link in the browser """
         webbrowser.open_new_tab(self.current["webpage_url"])
 
     def swap_info(self):
+        """ update text labels """
         if not self.youtube.last_videos:
             self.label_title.text = "..."
         else:
@@ -126,6 +158,7 @@ class Gui:
                 self.is_new = False
 
     def draw(self):
+        """ draw labels """
         self.label_author.draw()
         self.label_title.draw()
 
